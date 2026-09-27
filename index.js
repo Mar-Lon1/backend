@@ -1,12 +1,3 @@
-// importing cors
-const cors = require('cors');
-
-//Allow cross origin requests
-server.use(cors());
-
-
-
-
 // import express
 const express = require('express');
 
@@ -18,6 +9,8 @@ require('dotenv').config();
 
 // create the server
 const server = express();
+const cors = require('cors');
+server.use(cors());
 
 //Port Number
 const PORT = process.env.PORT || 3000;
