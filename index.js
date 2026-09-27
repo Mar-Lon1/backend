@@ -1,3 +1,12 @@
+// importing cors
+const cors = require('cors');
+
+//Allow cross origin requests
+server.use(cors());
+
+
+
+
 // import express
 const express = require('express');
 
