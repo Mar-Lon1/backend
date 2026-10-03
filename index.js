@@ -31,6 +31,18 @@ server.use(authRoutes)
 
 
 
+mongoose.connection.on('disconnected', () => {
+    console.log('MongoDB disconnected!');
+});
+
+mongoose.connection.on('reconnected', () => {
+    console.log('MongoDB reconnected!');
+});
+
+mongoose.connection.on('error', (err) => {
+    console.error('MongoDB connection error:', err);
+});
+
 mongoose.connect(MONGO_URL)
     .then(() => {
         console.log(`Mongo DB connected successfully on ${PORT}`)
@@ -41,8 +53,15 @@ mongoose.connect(MONGO_URL)
         })
     })
     .catch((err)=>{
-        console.log(err)
+        console.error("Failed to connect to MongoDB at startup:", err);
+        process.exit(1);
     })
+
+// Centralized error handler
+server.use((err, req, res, next) => {
+    console.error("Unhandled error:", err);
+    res.status(500).json({ message: "An unexpected error occurred. Please try again later." });
+});
 
 //import controller
 
