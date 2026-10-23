@@ -3,7 +3,6 @@ const express = require('express');
 
 //importing controllers
 const {retrieveUser,createUser,getUserById,updateUser,deleteUser} = require('../Controllers/usersControllers');
-const { findById } = require('../model/student');
 
 const router = express.Router()
 // // routes
